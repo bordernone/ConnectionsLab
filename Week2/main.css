@@ -1,0 +1,103 @@
+body {
+    margin: 0px;
+    font-family: Arial, sans-serif;
+    background-color: #e0e0e0;
+}
+
+.main {
+    max-width: 1264px;
+    width: 100%;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.container {
+    width: 400px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+}
+
+.top-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.top-box div {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 60px;
+}
+
+.input-box {
+    flex-basis: 70%;
+}
+
+.input-box input {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: solid 1.5px #b5b5b5;
+    height: 100%;
+    font-size: 22px;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #e0e0e0;
+}
+
+input[type="text"]:hover {
+    box-shadow: 0 0 5pt 0.5pt #d3d3d3;
+}
+input[type="text"]:focus {
+    box-shadow: 0 0 5pt 2pt #d3d3d3;
+    outline-width: 0px;
+}
+
+.equal-symbol {
+    flex-basis: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.output-box {
+    flex-basis: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-family: monospace;
+    border-radius: 5px;
+    border: solid 1.5px #b5b5b5;
+}
+
+.bottom-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-box button {
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+    background: transparent;
+    font-size: 22px;
+    font-family: monospace;
+    margin-top: 20px;
+    border: 2px solid #969696;
+    border-radius: 7px;
+}
+
+.bottom-box button:hover {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}

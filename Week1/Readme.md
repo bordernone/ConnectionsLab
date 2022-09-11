@@ -1,8 +1,13 @@
+Live version: https://bordernone.github.io/ConnectionsLab/Week1/
+
 ### Wireframe
 
 Wireframe 1: The wireframe for this webpage is available here: https://www.figma.com/file/uRBFF6nAB79Rh1z4rRU0Oi/ComLab-Assignment1-Wireframe
 
 Wireframe 2: https://www.figma.com/file/XYZEXiXyviOl2TW0EpUatr/ComLab-Assignment1-Wireframe2
+
+### Idea
+My app is simple portfolio webpage. For now, the webpage only displays user's profile picture and a short description. A video is also attached to the site which is played continuously (muted). The navbar is not functional yet as this is a single page app and there is no script attached.
 
 ### Progress
 
