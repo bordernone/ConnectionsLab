@@ -8,6 +8,11 @@ It is a simple web based calculator app for now. My idea is to create an advance
 1. Created two event listeners: one for tracking input changes and another one for listening to button click events.
 2. Attached each events to respective handlers
 
+### Challenges
+
+1. The biggest challenge with this web app is parsing the mathematical expression and generating the result. The solution I have used for now is, sort of, a workaround and it is potentially dangerous. This web app is part of a bigger idea and I will be writing a better algorithm to take care of computing the result.
+2. Had difficulties understanding the `input` and `onchange` event for `<input>` element; Used online resources to figure out which one is needed for this app. 
+
 ### Learning outcomes
 
 1. Learned to reference to DOM elements from JavaScript

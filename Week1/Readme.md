@@ -30,6 +30,10 @@ My app is simple portfolio webpage. For now, the webpage only displays user's pr
 
     h. Added video and hid the controls. Made the video loop infinitely
 
+### Challenges
+
+1. I found it difficult to make the height and width of the video element "dynamic". Resolved it by wrapping it with a parent component with relative positioning.
+
 ### Learning outcomes
 
 1. Learned to use CSS flex property.
