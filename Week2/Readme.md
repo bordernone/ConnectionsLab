@@ -1,5 +1,7 @@
 Link to the live version: https://bordernone.github.io/ConnectionsLab/Week2/
 
+Wireframe: https://www.figma.com/file/z4nRVXBMh0ONbFaWYlXtXJ/ComLab-Assignment2-Wireframe
+
 ### Idea
 It is a simple web based calculator app for now. My idea is to create an advance calculator app that can solve complex equations.
 
