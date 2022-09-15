@@ -96,6 +96,8 @@ input[type="text"]:focus {
     border-radius: 7px;
 }
 
+
+/* creates a glowing effect */
 .bottom-box button:hover {
     outline: none;
     border-color: #9ecaed;

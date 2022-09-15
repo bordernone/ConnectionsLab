@@ -65,6 +65,7 @@ body {
     height: 300px;
 }
 
+/* forcing video component to take container's size */
 .video-container {
     position: absolute;
     height: 100%;
