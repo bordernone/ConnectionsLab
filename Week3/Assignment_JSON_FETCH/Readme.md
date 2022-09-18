@@ -1,5 +1,5 @@
 ### Description
-The idea is to create something similar to "word cloud" that displays words that are related to the phrase/word that user types. It can be used for multiple purposes. Essentially, this API processes four major queries: for a given input X, one can find words that are similar to X, words that sound like X, words that are spelled like X, or words that are related to X. Use of wildcard, prefix, suffix are few extensions to this API. Furthermore, the words have a score assosciated with them which tells how the word is related to the user's entered text.
+The idea is to create something similar to "word cloud" that displays words that are related to the phrase/word that user types. It can be used for multiple purposes. Essentially, this API processes four major queries: for a given input X, one can find words that are similar to X, words that sound like X, words that are spelled like X, or words that are related to X. Use of wildcard, prefix, suffix are few extensions to this API. Furthermore, the words have a score associated with them which tells how the word is related to the user's entered text.
 
 
 ### Usage Guide
