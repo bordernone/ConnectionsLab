@@ -1,0 +1,16 @@
+body {
+    margin: 0px;
+    font-family: Arial, sans-serif;
+    background-color: #e0e0e0;
+}
+
+.main {
+    max-width: 1264px;
+    width: 100%;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    text-align: center;
+}
