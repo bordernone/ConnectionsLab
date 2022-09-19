@@ -18,7 +18,7 @@ window.onload = (event) => {
     });
 
     // Attach a onclick listener to the clear button
-    clearBtn.addEventListener("onclick", () => {
+    clearBtn.addEventListener("click", () => {
         handleClear();
     });
 };
