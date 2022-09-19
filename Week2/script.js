@@ -17,7 +17,7 @@ window.onload = (event) => {
         resolve();
     });
 
-    // Attach a onclick listener to the clear button
+    // Attach a click listener to the clear button
     clearBtn.addEventListener("click", () => {
         handleClear();
     });
@@ -30,7 +30,7 @@ function handleClear() {
     outputArea.innerHTML = "";
 }
 
-// This function is responsible to generating the answer of the entered mathematical expression
+// This function is responsible for generating the answer of the entered mathematical expression
 function resolve() {
     try {
         let res = Function(`'use strict'; return (${input})`)(); // Probably the worst solution. Shouldn't be used in production environment. 
