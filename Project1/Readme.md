@@ -1,4 +1,3 @@
-Live Version: https://bordernone.github.io/ConnectionsLab/Week3/Assignment_JSON_FETCH/
 
 Wireframe: https://www.figma.com/file/XiMYzaNuJd370IXGqldcJF/Untitled?node-id=1%3A2
 
