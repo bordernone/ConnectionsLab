@@ -5,17 +5,33 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Word Cloud</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Audiowide"
+        />
+
         <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
         <div class="main">
-            <form>
-                <input type="text" id="word-input" />
-                <button id="generate-btn">Generate Related Words</button>
-            </form>
-            <div id="output"></div>
+            <div class="container">
+                <h4 class="heading">Related Word Generator</h4>
+                <form class="input-form">
+                    <input
+                        type="text"
+                        id="word-input"
+                        class="input-box"
+                        placeholder="Enter a word/phrase"
+                    />
+
+                    <button id="generate-btn" class="submit-btn">
+                        Generate Related Words
+                    </button>
+                </form>
+                <div id="output" class="output-box"></div>
+            </div>
         </div>
     </body>
 </html>
