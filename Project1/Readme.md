@@ -12,6 +12,8 @@ The idea is to create something similar to "word cloud" that displays words that
 
 For my project, I use the default parameters without any wildcard for generating words that are similar to the text the user inputs. The words are already ranked based on their score when fetched from the API so I do not have to sort it.
 
+API: https://api.datamuse.com
+
 ### Challenges
 
 ##### Animating Bubble
@@ -55,3 +57,8 @@ Solution: I created a colors class which has many helpful function: generateRand
 
 -   [ ] User can select words from word cloud and export it as a file
 -   [ ] Make mobile friendly
+
+### Resources
+
+- https://api.datamuse.com
+- https://www.w3.org/TR/AERT/#color-contrast
