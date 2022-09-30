@@ -10,6 +10,8 @@ Live version: https://bordernone.github.io/ConnectionsLab/Project1/
 
 The idea is to create something similar to "word cloud" that displays words that are related to the phrase/word that user types. It can be used for multiple purposes. Essentially, this API processes four major queries: for a given input X, one can find words that are similar to X, words that sound like X, words that are spelled like X, or words that are related to X. Use of wildcard, prefix, suffix are few extensions to this API. Furthermore, the words have a score associated with them which tells how the word is related to the user's entered text.
 
+For my project, I use the default parameters without any wildcard for generating words that are similar to the text the user inputs. The words are already ranked based on their score when fetched from the API so I do not have to sort it.
+
 ### Challenges
 
 ##### Animating Bubble
