@@ -52,6 +52,7 @@ const generateSimilarWords = async (e, input) => {
             return item.word;
         });
 
+        // check if there is already an instance of p5. if not, create a new
         if (!p5Instance) {
             p5Instance = new p5(s);
         }
@@ -60,12 +61,14 @@ const generateSimilarWords = async (e, input) => {
     }
 };
 
+// This function handles everything related to P5js setup and canvas
 const s = (sketch) => {
-    let canvas;
-    let center;
+    let canvas; 
+    let center; // stores the center of the canvas
 
+    // stores all the bubbles (pre-set)
     let allBubbles = [];
-    let lastWordsList = [];
+    let lastWordsList = []; // this is a helper list which is used to check if the word list has changed or not
 
     sketch.setup = () => {
         canvas = sketch.createCanvas(
@@ -80,16 +83,21 @@ const s = (sketch) => {
     };
 
     sketch.draw = () => {
+        // Reinitialize the bubbles only if the word list has changed
         if (hasWordsListChanged()) {
             initializeBubbles();
             lastWordsList = [...wordsList];
         }
+        // clears the canvas every time. This allows for a transparent background
         sketch.clear();
+
+        // Every bubble has a draw function which draws the bubble based on it's lifecycle
         for (const [index, bubble] of allBubbles.entries()) {
             bubble.draw(wordsList[index]);
         }
     };
 
+    // Checks which bubble is clicked and calls the "onClick" function of that bubble
     sketch.mouseClicked = () => {
         for (const bubble of allBubbles) {
             if (bubble.clicked(sketch.mouseX, sketch.mouseY)) bubble.onClick();
@@ -97,6 +105,7 @@ const s = (sketch) => {
         return false;
     };
 
+    // Initializes the bubbles with respective radius and position
     initializeBubbles = () => {
         allBubbles = [];
 
@@ -120,12 +129,15 @@ const s = (sketch) => {
         }
     };
 
+    // Auxuliary function that checks if the word list has changed.
     hasWordsListChanged = () => {
+        // This is a naive approach but it works in my case since the list is composed of strings.
         return JSON.stringify(wordsList) !== JSON.stringify(lastWordsList);
     };
 };
 
 class Bubble {
+    // the constructor sets the x, y, diameter and the word for the bubble. it also initializes the bubble's lifecycle to null
     constructor(s, x, y, diameter, word = null) {
         this.sketch = s;
 
@@ -142,6 +154,7 @@ class Bubble {
         this.lifeCycle = "null";
     }
 
+    // This function decides whether to grow, shrink, or print the max bubble size
     draw(word = this.word) {
         if (word != this.word) this.word = word;
         if (this.lifeCycle === "null") this.grow();
@@ -149,9 +162,10 @@ class Bubble {
         if (this.lifeCycle === "dying") this.shrink();
     }
 
+    // This function creates the "grow" animation for the bubble
     async grow() {
         this.sketch.strokeWeight(0);
-        let diameter = Math.min(this.currentDiameter, this.diameter);
+        let diameter = Math.min(this.currentDiameter, this.diameter); 
         this.sketch.fill(this.color);
         this.sketch.circle(this.x, this.y, diameter);
 
@@ -174,6 +188,7 @@ class Bubble {
         }
     }
 
+    // This function prints the max sized bubble
     live() {
         this.sketch.strokeWeight(0);
         this.sketch.fill(this.color);
@@ -190,6 +205,7 @@ class Bubble {
         this.sketch.text(this.word, this.x, this.y);
     }
 
+    // This function prints the bubble by reducing its radius 
     async shrink() {
         this.sketch.strokeWeight(0);
         let diameter = Math.min(this.currentDiameter, this.diameter);
@@ -216,6 +232,7 @@ class Bubble {
         }
     }
 
+    // Returns true if clickX and clickY is within the circle
     clicked(clickX, clickY) {
         if (
             this.sketch.dist(clickX, clickY, this.x, this.y) <=
@@ -225,10 +242,12 @@ class Bubble {
         return false;
     }
 
+    // Called when the bubble was clicked
     onClick() {
         this.lifeCycle = "dying";
     }
 
+    // This is called when the bubble has shrunk to zero.
     createNew() {
         generateSimilarWords(undefined, this.word);
         console.log(this.word);
@@ -237,17 +256,20 @@ class Bubble {
 
 class Colors {
     constructor() {
-        this.pastColors = new Set();
+        this.pastColors = new Set(); // store the previously generated colors
     }
 
+    // This function calculates the intensity of the background based on the formula (Check ReadMe)
     intensity(red, green, blue) {
         return 1 - (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
     }
 
+    // Generates a random number between 0, 255
     randomNum() {
         return Math.floor(Math.random() * 256);
     }
 
+    // Generates rgb combination. If noRepeat is true, it doesn't generate same color again
     generateRandomColor(noRepeat = true) {
         let red = this.randomNum();
         let green = this.randomNum();
@@ -264,6 +286,7 @@ class Colors {
         return color;
     }
 
+    // This returns white or black depending upon the intensity
     textColor(r, g, b) {
         if (this.intensity(r, g, b) < 0.5) return "#000000";
         return "#ffffff";
