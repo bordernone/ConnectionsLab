@@ -1,0 +1,44 @@
+body {
+    margin: 0px;
+    font-family: Arial, sans-serif;
+    background-color: cornsilk;
+}
+
+.main {
+    max-width: 1264px;
+    width: 100%;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.output-area {
+    margin-top: 50px;
+}
+
+.output-area span {
+    border: solid 1px gray;
+    padding: 10px;
+    border-radius: 100%;
+    background-color: black;
+    color: white;
+    display: inline-block;
+    margin: 5px;
+}
+
+.btn {
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px gray;
+    background-color: black;
+    color: white;
+}
+
+.input {
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px gray;
+}
