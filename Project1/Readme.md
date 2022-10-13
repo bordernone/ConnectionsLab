@@ -28,7 +28,7 @@ Solution: Setting bubble's lifecycle. I used a parameter for the Bubble object c
 -   I decided to spawn bubbles with randomly selected colors. Creating random colors for every bubble and doing it again for every iteration would have made the code look unclean.
 -   Choosing color of the text based on background was also a challenge since it'd make it difficult to read light colored text on light background and vice-versa.
 
-Solution: I created a colors class which has many helpful function: generateRandomColor (returns a random red, green, blue combination without repeating), textColor (returns the color of the text depending upon the background), etc. The most interesting function is textColor that takes a rgb combination and returns the appropriate text color. The function uses a formula from [this](https://www.w3.org/TR/AERT/#color-contrast) page to compute the appropriate intensity of the background. Whent he intensity if above threshold, it returns white otherwise it returns black.
+Solution: I created a colors class which has many helpful function: generateRandomColor (returns a random red, green, blue combination without repeating), textColor (returns the color of the text depending upon the background), etc. The most interesting function is textColor that takes a rgb combination and returns the appropriate text color. The function uses a formula from [this](https://www.w3.org/TR/AERT/#color-contrast) page to compute the appropriate intensity of the background. When the intensity if above threshold, it returns white otherwise it returns black.
 
 <center>
 <img src="color-intensity.png" />
