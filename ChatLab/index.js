@@ -58,6 +58,8 @@ app.get("/messages", (req, res) => {
 
 app.use("/", express.static("public"));
 
-app.listen(3000, (e) => {
-    if (!e) console.log("Running");
+const PORT = process.env.PORT || process.env.port || 3000;
+
+app.listen(PORT, (e) => {
+    if (!e) console.log(`Running on ${PORT}`);
 });
