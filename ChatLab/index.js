@@ -71,6 +71,7 @@ io.on("connect", (socket) => {
                                         "Something went wrong!"
                                     );
                                 } else {
+                                    // Send messages
                                     io.sockets.emit("new_message", {
                                         time: +new Date(),
                                         data: docs,

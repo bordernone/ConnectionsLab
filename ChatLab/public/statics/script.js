@@ -3,15 +3,11 @@ let input, outputArea;
 
 let socket = io();
 
-const URLs = {
-    GET: "/messages",
-    SEND: "/message",
-};
-
 window.onload = () => {
     input = document.getElementById("input-field");
     outputArea = document.getElementById("output-area");
 
+    // Handle enter press when typing message
     input.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -30,10 +26,15 @@ socket.on("disconnect", () => {
 });
 
 socket.on("new_message", (data) => {
-    displayMessages(data);
+    displayMessages(data); // display messages
 
-    scrollToBottom();
+    scrollToBottom(); // Scroll to bottom when the message new message is loaded
 });
+
+// Server can send error when something goes wrong. So warn user in such cases
+socket.on("error", () => {
+    alert("Something went wrong with the server. Please try again!");
+})
 
 const sendMessage = (e) => {
     let message = input.value;
@@ -97,7 +98,6 @@ const displayMessages = (arr) => {
 };
 
 const scrollToBottom = () => {
-    console.log(outputArea.scrollHeight);
     setTimeout(() => {
         outputArea.scroll({
             top: outputArea.scrollHeight + 100,
