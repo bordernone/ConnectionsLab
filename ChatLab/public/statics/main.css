@@ -28,6 +28,13 @@ body {
 .chat-body {
     flex-grow: 1;
     flex: 1;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chat-body::-webkit-scrollbar {
+    display: none;
 }
 
 .chat-input {
@@ -52,22 +59,43 @@ body {
     display: flex;
 }
 
-.message span.msg {
-    padding: 8px;
+.message div.msg {
     margin: 4px;
-    border-radius: 10px;
-    display: block;
+    display: flex;
 }
 
-.message.my span.msg {
+.message.my div.msg {
+    flex-direction: column;
+}
+
+.message.other div.msg {
+    flex-direction: column-reverse;
+    text-align: left;
+}
+
+.message.my div.msg .user-msg {
     text-align: right;
     background-color: #d4e2e2;
+    border-radius: 10px;
+    padding: 8px;
 }
 
-.message.other span.msg {
+.message.other div.msg .user-msg {
     text-align: left;
-    color: white;
     background-color: black;
+    border-radius: 10px;
+    padding: 8px;
+    color: white;
+}
+
+.message.my div.msg .username {
+    font-size: 12px;
+    text-align: right;
+}
+
+.message.other div.msg .username {
+    font-size: 12px;
+    text-align: left;
 }
 
 .message.my span.whitespace-msg {

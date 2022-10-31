@@ -12,54 +12,74 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.post("/message", (req, res) => {
-    const { username, message } = req.body;
-    if (username && message) {
-        db.insert(
-            { username, message, createdAt: +new Date() },
-            function (err) {
-                if (err) {
-                    res.sendStatus(500).send("Database failed!");
-                } else {
-                    db.find({})
-                        .sort({ createdAt: 1 })
-                        .exec((err, docs) => {
-                            if (err) {
-                                res.sendStatus(500).send("Database failed!");
-                            } else {
-                                res.json({
-                                    time: +new Date(),
-                                    data: docs,
-                                });
-                            }
-                        });
-                }
-            }
-        );
-    } else {
-        res.sendStatus(403).send("Username or Message undefined");
-    }
+// ========== Setup server ======= //
+app.use("/", express.static("public"));
+
+const PORT = process.env.PORT || process.env.port || 3000;
+
+//creating an http server ON the express app
+let http = require("http");
+let server = http.createServer(app);
+server.listen(PORT, () => {
+    console.log(`Running on ${PORT}`);
 });
 
-app.get("/messages", (req, res) => {
+// ======== Socket ========== //
+//add sockets on top of the http server
+let io = require("socket.io");
+io = new io.Server(server);
+
+io.on("connect", (socket) => {
+    console.log(`Socket ID: ${socket.id}`);
+
+    // Send initial message
     db.find({})
         .sort({ createdAt: 1 })
         .exec((err, docs) => {
             if (err) {
-                res.sendStatus(500).send("Database failed!");
+                console.error(err);
+                socket.emit("error", "Something went wrong!");
             } else {
-                res.json({
+                socket.emit("new_message", {
                     time: +new Date(),
                     data: docs,
                 });
             }
         });
-});
 
-app.use("/", express.static("public"));
+    socket.on("disconnect", () => {
+        console.log(`Disconnected ID: ${socket.id}`);
+    });
 
-const PORT = process.env.PORT || process.env.port || 3000;
-
-app.listen(PORT, (e) => {
-    if (!e) console.log(`Running on ${PORT}`);
+    // When a new message is received
+    socket.on("new_message", ({ username, message }) => {
+        if (username && message) {
+            db.insert(
+                { username, message, createdAt: +new Date() },
+                function (err) {
+                    if (err) {
+                        console.error(err);
+                        io.sockets.emit("error", "Something went wrong!");
+                    } else {
+                        db.find({})
+                            .sort({ createdAt: 1 })
+                            .exec((err, docs) => {
+                                if (err) {
+                                    console.error(err);
+                                    io.sockets.emit(
+                                        "error",
+                                        "Something went wrong!"
+                                    );
+                                } else {
+                                    io.sockets.emit("new_message", {
+                                        time: +new Date(),
+                                        data: docs,
+                                    });
+                                }
+                            });
+                    }
+                }
+            );
+        }
+    });
 });

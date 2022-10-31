@@ -1,6 +1,8 @@
 let username = prompt("Enter username");
 let input, outputArea;
 
+let socket = io();
+
 const URLs = {
     GET: "/messages",
     SEND: "/message",
@@ -16,54 +18,90 @@ window.onload = () => {
             sendMessage(event);
         }
     });
-
-    setInterval(getMessage, 1000);
 };
+
+socket.on("connect", () => {
+    console.log("Connected!");
+    scrollToBottom();
+});
+
+socket.on("disconnect", () => {
+    console.log("Disconnected");
+});
+
+socket.on("new_message", (data) => {
+    displayMessages(data);
+
+    scrollToBottom();
+});
 
 const sendMessage = (e) => {
     let message = input.value;
 
-    fetch(URLs.SEND, {
-        method: "POST",
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, message }),
-    })
-        .then((res) => res.json())
-        .then((res) => {
-            input.value = "";
-            displayMessages(res);
-        });
-};
-
-const getMessage = () => {
-    fetch(URLs.GET)
-        .then((res) => res.json())
-        .then((res) => displayMessages(res));
+    socket.emit("new_message", { username, message });
+    input.value = "";
 };
 
 const displayMessages = (arr) => {
+    let lastUsername = undefined;
     const elements = arr.data.reduce((final, item) => {
+        let elem = "";
         if (item.username === username) {
-            return (
-                final +
-                `<div class="message my">
+            if (item.username === lastUsername) {
+                elem =
+                    final +
+                    `<div class="message my">
                     <span class="whitespace-msg" ></span>
-                    <span class="msg">${item.message}</span>
-                </div>`
-            );
+                    <div class="msg">
+                        <span class="user-msg">${item.message}</span>
+                    </div>
+                </div>`;
+            } else {
+                elem =
+                    final +
+                    `<div class="message my">
+                    <span class="whitespace-msg" ></span>
+                    <div class="msg">
+                        <span class="username">${item.username}</span>
+                        <span class="user-msg">${item.message}</span>
+                    </div>
+                </div>`;
+            }
         } else {
-            return (
-                final +
-                `<div class="message other">
-                    <span class="msg">${item.message}</span>
+            if (item.username === lastUsername) {
+                elem =
+                    final +
+                    `<div class="message other">
+                    <div class="msg">
+                        <span class="user-msg">${item.message}</span>
+                    </div>
                     <span class="whitespace-msg" ></span>
-                </div>`
-            );
+                </div>`;
+            } else {
+                elem =
+                    final +
+                    `<div class="message other">
+                    <div class="msg">
+                        <span class="user-msg">${item.message}</span>
+                        <span class="username">${item.username}</span>
+                    </div>
+                    <span class="whitespace-msg" ></span>
+                </div>`;
+            }
         }
+        lastUsername = item.username;
+        return elem;
     }, "");
 
     outputArea.innerHTML = elements;
+};
+
+const scrollToBottom = () => {
+    console.log(outputArea.scrollHeight);
+    setTimeout(() => {
+        outputArea.scroll({
+            top: outputArea.scrollHeight + 100,
+            behavior: "smooth",
+        });
+    }, 100);
 };
